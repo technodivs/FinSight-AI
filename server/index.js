@@ -18,7 +18,14 @@ const app = express();
 
 
 // Middlewares
-app.use(cors());
+app.use(cors({
+    origin:[
+        "https://finsight-ai-68rn.onrender.com",
+        "http://localhost:5173",
+        "http://localhost:5177"
+    ],
+    credentials:true
+}));
 app.use(express.json());
 
 
