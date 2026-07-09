@@ -36,7 +36,7 @@ form
 alert("Account Created");
 
 
-navigate("/login");
+navigate("/");
 
 
 }

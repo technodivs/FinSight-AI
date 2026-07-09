@@ -1,8 +1,10 @@
 import React from "react";
 import ReactDOM from "react-dom/client";
 import "./index.css";
+
 import Login from "./pages/Login";
 import Dashboard from "./pages/Dashboard";
+import Register from "./pages/Register";
 
 
 import {
@@ -10,8 +12,6 @@ import {
   Routes,
   Route
 } from "react-router-dom";
-
-import Register from "./pages/Register";
 
 
 ReactDOM.createRoot(
@@ -21,24 +21,23 @@ ReactDOM.createRoot(
   <BrowserRouter>
 
     <Routes>
-      <Route
-      path="/"
-      element={<Dashboard/>}
-    />
 
-      <Route 
-        path="/register" 
-        element={<Register />} 
+      <Route
+        path="/"
+        element={<Login/>}
       />
-      <Route
-       path="/login"
-       element={<Login/>}
-       />
-       <Route
-       path="/dashboard"
 
-       element={<Dashboard/>}
-       />
+
+      <Route
+        path="/register"
+        element={<Register/>}
+      />
+
+
+      <Route
+        path="/dashboard"
+        element={<Dashboard/>}
+      />
 
     </Routes>
 
