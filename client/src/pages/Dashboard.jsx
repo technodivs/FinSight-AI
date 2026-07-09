@@ -1,3 +1,4 @@
+import { useNavigate } from "react-router-dom";
 import Navbar from "../components/Navbar";
 import ExpenseForm from "../components/ExpenseForm";
 import IncomeForm from "../components/IncomeForm";
@@ -15,7 +16,7 @@ import API from "../api/axios";
 
 function Dashboard(){
 
-
+const navigate = useNavigate();
 const [data,setData]=useState(null);
 const [ai,setAi]=useState("");
 const [expenses,setExpenses]=useState([]);
@@ -139,14 +140,19 @@ console.log(error);
 
 
 
-useEffect(()=>{
+useEffect(() => {
 
-getDashboard();
+ const token = localStorage.getItem("token");
 
-getExpenses();
+ if(!token){
+   navigate("/");
+   return;
+ }
 
-},[]);
+ getDashboard();
+ getExpenses();
 
+}, []);
 
 
 
