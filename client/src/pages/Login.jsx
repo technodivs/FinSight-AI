@@ -134,6 +134,18 @@ className="bg-black text-white p-2 w-full"
 Login
 
 </button>
+<p className="text-center text-sm">
+
+New user?
+
+<span
+onClick={() => navigate("/register")}
+className="text-blue-600 cursor-pointer ml-1"
+>
+Create Account
+</span>
+
+</p>
 
 
 </form>
