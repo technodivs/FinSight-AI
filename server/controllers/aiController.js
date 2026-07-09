@@ -11,6 +11,11 @@ new GoogleGenerativeAI(
 process.env.GEMINI_API_KEY
 );
 
+console.log(
+"Gemini Key Loaded:",
+process.env.GEMINI_API_KEY ? "YES" : "NO"
+);
+
 
 
 const analyzeFinance=async(req,res)=>{
@@ -87,7 +92,7 @@ Rules:
 
 
 const model = genAI.getGenerativeModel({
-    model: "gemini-2.0-flash"
+    model: "gemini-1.5-flash"
 });
 
 
@@ -110,21 +115,20 @@ analysis:response
 
 
 }
-
 catch(error){
 
+console.log("GEMINI ERROR:", error);
 
 res.status(500).json({
-
 error:error.message
-
 });
 
-
 }
 
 
 }
+
+
 
 
 module.exports={
