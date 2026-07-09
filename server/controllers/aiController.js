@@ -1,56 +1,51 @@
-const { GoogleGenAI } = require("@google/genai");
+const OpenAI = require("openai");
+
+const Income = require("../models/Income");
+const Expense = require("../models/Expense");
 
 
-const Income=require("../models/Income");
-const Expense=require("../models/Expense");
-
-
-const ai = new GoogleGenAI({
-apiKey: process.env.GEMINI_API_KEY
+// OpenAI setup
+const openai = new OpenAI({
+    apiKey: process.env.OPENAI_API_KEY
 });
+
 
 console.log(
-"Gemini Key Loaded:",
-process.env.GEMINI_API_KEY ? "YES" : "NO"
+    "OpenAI Key Loaded:",
+    process.env.OPENAI_API_KEY ? "YES" : "NO"
 );
 
 
 
-const analyzeFinance=async(req,res)=>{
+const analyzeFinance = async (req, res) => {
+
+    try {
+
+        const income = await Income.find({
+            user: req.user._id
+        });
 
 
-try{
-
-
-const income=
-await Income.find({
-user:req.user._id
-});
-
-
-const expenses=
-await Expense.find({
-user:req.user._id
-});
+        const expenses = await Expense.find({
+            user: req.user._id
+        });
 
 
 
-const totalIncome=
-income.reduce(
-(sum,i)=>sum+i.amount,
-0
-);
+        const totalIncome = income.reduce(
+            (sum, i) => sum + i.amount,
+            0
+        );
 
 
-const totalExpense=
-expenses.reduce(
-(sum,e)=>sum+e.amount,
-0
-);
+        const totalExpense = expenses.reduce(
+            (sum, e) => sum + e.amount,
+            0
+        );
 
 
 
-const prompt=`
+        const prompt = `
 
 You are FinSight AI, a personal finance assistant.
 
@@ -61,7 +56,10 @@ Currency: Indian Rupees (₹)
 Monthly Income:
 ₹${totalIncome}
 
-Expenses:
+Total Expenses:
+₹${totalExpense}
+
+Expenses Data:
 ${JSON.stringify(expenses)}
 
 Provide:
@@ -89,43 +87,72 @@ Rules:
 `;
 
 
-const result =
-await ai.models.generateContent({
-    model:"gemini-2.5-flash",
-    contents:prompt
-});
 
+        const result =
+            await openai.chat.completions.create({
 
-const response =
-result.text || result.candidates?.[0]?.content?.parts?.[0]?.text;
+                model: "gpt-4.1-mini",
 
+                messages: [
 
-res.json({
-    analysis: response
-});
+                    {
+                        role: "system",
+                        content:
+                            "You are FinSight AI, an AI powered personal finance advisor."
+                    },
 
+                    {
+                        role: "user",
+                        content: prompt
+                    }
 
+                ]
 
-}
-catch(error){
-
-console.log("AI ERROR FULL:", error);
-
-res.status(500).json({
-message:"AI failed",
-error:error.message
-});
-
-}
-
-
-}
+            });
 
 
 
+        const response =
+            result.choices[0].message.content;
 
-module.exports={
 
-analyzeFinance
 
-}
+        res.json({
+
+            analysis: response
+
+        });
+
+
+    }
+
+    catch (error) {
+
+
+        console.log(
+            "AI ERROR FULL:",
+            error
+        );
+
+
+        res.status(500).json({
+
+            message: "AI failed",
+
+            error: error.message
+
+        });
+
+
+    }
+
+
+};
+
+
+
+module.exports = {
+
+    analyzeFinance
+
+};
