@@ -34,36 +34,39 @@ const COLORS = [
 
 
 // Dashboard data
-const getDashboard = async () => {
+const getDashboard = async()=>{
 
-  try {
+try{
 
-    console.log("Dashboard API calling...");
+console.log("Dashboard API started");
 
-    const res = await API.get("/dashboard");
+const res = await API.get("/dashboard");
 
-    console.log("Dashboard Data:", res.data);
+console.log(res.data);
 
-    setData(res.data);
+setData(res.data);
 
-  } 
-  catch (error) {
+}
 
-    console.log("Dashboard Error:", error);
+catch(error){
 
-    setData({
-      totalIncome: 0,
-      totalExpense: 0,
-      savings: 0,
-      categoryData: []
-    });
+console.log("Dashboard error",error);
 
-  } 
-  finally {
+setData({
+ totalIncome:0,
+ totalExpense:0,
+ savings:0
+});
 
-    setLoading(false);
+}
 
-  }
+finally{
+
+console.log("loading false");
+
+setLoading(false);
+
+}
 
 };
 
@@ -160,7 +163,11 @@ console.log(error);
 
 useEffect(() => {
 
+ console.log("Dashboard mounted");
+
  const token = localStorage.getItem("token");
+
+ console.log("TOKEN:", token);
 
  if(!token){
    navigate("/");
