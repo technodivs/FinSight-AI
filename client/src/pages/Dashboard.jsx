@@ -18,7 +18,13 @@ function Dashboard(){
 
 const navigate = useNavigate();
 
-const [data,setData] = useState(null);
+const [data,setData] = useState({
+  totalIncome:0,
+  totalExpense:0,
+  balance:0,
+  savingsRate:0,
+  category:[]
+});
 const [ai,setAi] = useState("");
 const [expenses,setExpenses] = useState([]);
 const [loading,setLoading] = useState(true);
@@ -55,7 +61,9 @@ console.log("Dashboard error",error);
 setData({
  totalIncome:0,
  totalExpense:0,
- savings:0
+ balance:0,
+ savingsRate:0,
+ category:{}
 });
 
 }
@@ -181,18 +189,8 @@ useEffect(() => {
 
 
 
-if(loading){
-
-return(
-
-<h1 className="text-center mt-20">
-
-Loading...
-
-</h1>
-
-)
-
+if(loading && !data){
+ return <h2>Loading...</h2>
 }
 
 
@@ -227,7 +225,7 @@ FinSight AI Dashboard 🚀
 
 <p className="text-3xl font-bold">
 
-₹{data.totalIncome}
+₹{data?.totalIncome}
 
 </p>
 
@@ -241,7 +239,7 @@ FinSight AI Dashboard 🚀
 
 <p className="text-3xl font-bold">
 
-₹{data.totalExpense}
+₹{data?.totalExpense}
 
 </p>
 
@@ -255,7 +253,7 @@ FinSight AI Dashboard 🚀
 
 <p className="text-3xl font-bold">
 
-₹{data.balance}
+₹{data?.balance}
 
 </p>
 
@@ -362,12 +360,10 @@ Category Spending
 <Pie
 
 data={
-Object.entries(data.category)
+Object.entries(data?.category || {})
 .map(([name,value])=>({
-
-name,
-value
-
+ name,
+ value
 }))
 }
 
@@ -384,20 +380,16 @@ label
 
 
 {
-Object.entries(data.category)
+Object.entries(data?.category || {})
 .map((_,index)=>(
-
 
 <Cell
 
 key={index}
 
-fill={
-COLORS[index % COLORS.length]
-}
+fill={COLORS[index % COLORS.length]}
 
 />
-
 
 ))
 
