@@ -262,7 +262,12 @@ FinSight AI Dashboard 🚀
 
 </div>
 <IncomeForm refresh={getDashboard}/>
-<ExpenseForm refresh={getDashboard}/>
+<ExpenseForm 
+ refresh={()=>{
+   getDashboard();
+   getExpenses();
+ }}
+/>
 <div className="bg-white text-black p-6 rounded-xl mt-10">
 
 
