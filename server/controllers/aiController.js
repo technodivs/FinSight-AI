@@ -92,7 +92,7 @@ Rules:
 
 
 const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash"
+    model: "gemini-1.5-flash-latest"
 });
 
 
@@ -117,9 +117,10 @@ analysis:response
 }
 catch(error){
 
-console.log("GEMINI ERROR:", error);
+console.log("AI ERROR FULL:", error);
 
 res.status(500).json({
+message:"AI failed",
 error:error.message
 });
 
