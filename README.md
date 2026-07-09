@@ -5,10 +5,23 @@ FinSight AI is a full-stack AI-powered personal finance management platform that
 The platform provides smart recommendations to improve savings, detect overspending patterns, and follow better budgeting strategies.
 
 
-## 🚀 Live Demo
 
-🔗 Frontend: Add your deployed frontend URL here  
-🔗 Backend API: Add your backend URL here
+---
+
+# 🌐 Live Deployment
+
+## Frontend
+
+https://finsight-ai-68m.onrender.com
+
+
+## 🔗 Backend API
+
+https://finsight-ai-backend-xjpp.onrender.com
+
+
+---
+
 
 
 ## ✨ Features
@@ -47,7 +60,71 @@ Provides:
 - Overspending Detection
 - Personalized Saving Tips
 - 50-30-20 Budget Planning
+---
 
+# 📌 API Endpoints
+
+
+## 🔐 Authentication
+
+### Register User
+
+POST /api/auth/register
+
+
+### Login User
+
+POST /api/auth/login
+
+
+---
+
+## 💰 Income APIs
+
+### Add Income
+
+POST /api/income/add
+
+
+### Get Income
+
+GET /api/income
+
+
+---
+
+## 💸 Expense APIs
+
+### Add Expense
+
+POST /api/expenses/add
+
+
+### Get Expenses
+
+GET /api/expenses
+
+
+### Delete Expense
+
+DELETE /api/expenses/delete/:id
+
+
+---
+
+## 📊 Dashboard API
+
+GET /api/dashboard
+
+
+---
+
+## 🤖 AI Financial Advisor API
+
+GET /api/ai/analyze
+
+
+---
 
 ## 🛠️ Tech Stack
 
@@ -147,9 +224,48 @@ Start backend
 npm start
 ```
 
+## 📖 How It Works
+
+1. User creates an account or logs in securely.
+
+2. User adds financial details including:
+   - 💰 Monthly Income
+   - 💸 Daily Expenses
+   - 🏷️ Expense Categories
+
+3. The backend stores user financial data securely using MongoDB.
+
+4. Dashboard analyzes transactions and displays:
+   - 📊 Total Income
+   - 📉 Total Expenses
+   - 💵 Savings Amount
+   - 📈 Savings Percentage
+   - 🥧 Category-wise Spending Charts
+
+5. User clicks **Analyze My Spending ✨**
+
+6. Financial data is processed using AI.
+
+7. AI Financial Advisor generates:
+   - 🧠 Financial Health Score
+   - 📄 Spending Summary
+   - ⚠️ Overspending Detection
+   - 💰 Monthly Savings Suggestions
+   - 📊 50-30-20 Budget Plan
+   - 💡 Personalized Money Management Tips
+
+8. Results are displayed instantly in an interactive dashboard.
+
+Users can:
+- ➕ Add income
+- ➕ Add expenses
+- 🗑️ Delete expenses
+- 📊 Track spending visually
+- 🤖 Get AI-powered financial advice
+
 
 ## 📸 Screenshots
-## 📸 Screenshots
+
 
 ### Register
 
@@ -162,12 +278,12 @@ npm start
 
 ### Dashboard
 
-![Dashboard1](screenshots/dashboard.png)
-![Dashboard2](screenshots/dashboard.png)
-![Dashboard3](screenshots/dashboard.png)
-![Dashboard4](screenshots/dashboard.png)
-![Dashboard5](screenshots/dashboard.png)
-![Dashboard6](screenshots/dashboard.png)
+![Dashboard1](screenshots/dashboard1.png)
+![Dashboard2](screenshots/dashboard2.png)
+![Dashboard3](screenshots/dashboard3.png)
+![Dashboard4](screenshots/dashboard4.png)
+![Dashboard5](screenshots/dashboard5.png)
+![Dashboard6](screenshots/dashboard6.png)
 
 
 
@@ -186,9 +302,77 @@ npm start
 **Devanshi Srivastava**
 
 B.Tech CSE (AI & ML)  
-Full Stack Developer
+Full Stack & AI Developer
 
+**GitHub**
+
+🔗 https://github.com/technodivs
+
+
+**LinkedIn**
+
+🔗 https://www.linkedin.com/in/devanshisrivastava08/
+
+
+---
+
+## 🤝 Contributing
+
+Contributions, issues, and feature requests are welcome.
+
+If you want to contribute:
+
+1. Fork this repository
+
+2. Create a new branch
+
+```bash
+git checkout -b feature-name
+```
+
+3. Commit your changes
+
+```bash
+git commit -m "Added new feature"
+```
+
+4. Push your branch
+
+```bash
+git push origin feature-name
+```
+
+5. Create a Pull Request
+
+
+---
 
 ## ⭐ Support
 
-If you like this project, give it a ⭐ on GitHub!
+If you found this project useful, don't forget to give it a ⭐ on GitHub.
+
+
+---
+
+## 📜 License
+
+This project is open-source and available under the MIT License.
+---
+
+## 🙏 Acknowledgements
+
+Special thanks to the technologies and platforms that made this project possible:
+
+- 🤖 Google Gemini AI – AI-powered financial analysis and personalized recommendations
+- ⚛️ React.js – Frontend user interface development
+- ⚡ Vite – Fast and optimized React development environment
+- 🟢 Node.js – Backend runtime environment
+- 🚀 Express.js – REST API development
+- 🍃 MongoDB – Database for storing user financial data
+- 🔐 JWT Authentication – Secure user authentication
+- 📊 Recharts – Interactive financial data visualization
+- 🎨 Tailwind CSS – Modern responsive UI design
+- ☁️ Render – Backend deployment
+- 🌐 GitHub – Version control and project hosting
+
+---
