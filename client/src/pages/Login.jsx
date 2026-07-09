@@ -23,11 +23,12 @@ e.preventDefault();
 
 try{
 
-const res=await API.post(
+const res = await API.post(
 "/auth/login",
 form
 );
 
+console.log("LOGIN RESPONSE:", res.data);
 
 localStorage.setItem(
 "token",
