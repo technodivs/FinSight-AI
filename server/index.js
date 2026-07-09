@@ -22,6 +22,7 @@ app.use(cors({
     origin:[
         "https://finsight-ai-68rn.onrender.com",
         "http://localhost:5173",
+        "http://localhost:5175",
         "http://localhost:5177"
     ],
     credentials:true

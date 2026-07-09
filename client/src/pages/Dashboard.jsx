@@ -111,27 +111,23 @@ finally{
 
 
 // Gemini AI
-const analyzeFinance=async()=>{
-
+const analyzeFinance = async()=>{
 
 try{
 
+console.log("AI button clicked");
 
-const res=await API.get(
-"/ai/analyze"
-);
+const res = await API.get("/ai/analyze");
 
+console.log("AI RESPONSE:",res.data);
 
-setAi(
-res.data.analysis
-);
-
+setAi(res.data.analysis);
 
 }
 
 catch(error){
 
-console.log(error);
+console.log("AI ERROR:",error.response?.data || error);
 
 }
 
