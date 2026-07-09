@@ -1,15 +1,13 @@
-const { GoogleGenerativeAI } =
-require("@google/generative-ai");
+const { GoogleGenAI } = require("@google/genai");
 
 
 const Income=require("../models/Income");
 const Expense=require("../models/Expense");
 
 
-const genAI =
-new GoogleGenerativeAI(
-process.env.GEMINI_API_KEY
-);
+const ai = new GoogleGenAI({
+apiKey: process.env.GEMINI_API_KEY
+});
 
 console.log(
 "Gemini Key Loaded:",
@@ -91,18 +89,14 @@ Rules:
 `;
 
 
-const model = genAI.getGenerativeModel({
-    model: "gemini-1.5-flash-latest"
+const result =
+await ai.models.generateContent({
+model:"gemini-2.5-flash",
+contents:prompt
 });
 
 
-
-const result =
-await model.generateContent(prompt);
-
-
-const response =
-result.response.text();
+const response = result.text;
 
 
 
