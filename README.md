@@ -151,6 +151,10 @@ npm start
 ## 📸 Screenshots
 ## 📸 Screenshots
 
+### Register
+
+![Register](screenshots/register.png)
+
 ### Login Page
 
 ![Login Page](screenshots/login.png)
@@ -158,41 +162,14 @@ npm start
 
 ### Dashboard
 
-![Dashboard](screenshots/dashboard.png)
-### 📊 Dashboard
-
-#### Dashboard Overview
-
-![Dashboard 1](screenshots/dashboard1.png)
-
-
-#### Income & Expense Analytics
-
-![Dashboard 2](screenshots/dashboard2.png)
+![Dashboard1](screenshots/dashboard.png)
+![Dashboard2](screenshots/dashboard.png)
+![Dashboard3](screenshots/dashboard.png)
+![Dashboard4](screenshots/dashboard.png)
+![Dashboard5](screenshots/dashboard.png)
+![Dashboard6](screenshots/dashboard.png)
 
 
-#### Category Spending Chart
-
-![Dashboard 3](screenshots/dashboard3.png)
-
-
-#### Expense Management
-
-![Dashboard 4](screenshots/dashboard4.png)
-
-
-#### Complete Finance Dashboard
-
-![Dashboard 5](screenshots/dashboard5.png)
-![Dashboard 6](screenshots/dashboard6.png)
-
-
-
-
-- Login Page
-- Dashboard
-- Expense Analytics
-- AI Advisor
 
 
 ## 🔮 Future Enhancements
