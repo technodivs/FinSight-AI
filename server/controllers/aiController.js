@@ -1,158 +1,116 @@
-const OpenAI = require("openai");
+const { GoogleGenAI } = require("@google/genai");
 
 const Income = require("../models/Income");
 const Expense = require("../models/Expense");
 
 
-// OpenAI setup
-const openai = new OpenAI({
-    apiKey: process.env.OPENAI_API_KEY
+const ai = new GoogleGenAI({
+    apiKey: process.env.GEMINI_API_KEY
 });
 
 
 console.log(
-    "OpenAI Key Loaded:",
-    process.env.OPENAI_API_KEY ? "YES" : "NO"
+"Gemini Key:",
+process.env.GEMINI_API_KEY ? "YES" : "NO"
 );
 
 
 
-const analyzeFinance = async (req, res) => {
+const analyzeFinance = async(req,res)=>{
 
-    try {
-
-        const income = await Income.find({
-            user: req.user._id
-        });
+try{
 
 
-        const expenses = await Expense.find({
-            user: req.user._id
-        });
+const income =
+await Income.find({
+user:req.user._id
+});
 
 
-
-        const totalIncome = income.reduce(
-            (sum, i) => sum + i.amount,
-            0
-        );
-
-
-        const totalExpense = expenses.reduce(
-            (sum, e) => sum + e.amount,
-            0
-        );
+const expenses =
+await Expense.find({
+user:req.user._id
+});
 
 
 
-        const prompt = `
+
+
+const totalIncome =
+income.reduce(
+(sum,i)=>sum+i.amount,
+0
+);
+
+
+const totalExpense =
+expenses.reduce(
+(sum,e)=>sum+e.amount,
+0
+);
+
+const prompt = `
 
 You are FinSight AI, a personal finance assistant.
 
-Analyze the user's monthly financial data.
+Analyze this user's finance.
 
-Currency: Indian Rupees (₹)
+Income: ₹${totalIncome}
 
-Monthly Income:
-₹${totalIncome}
+Expense: ₹${totalExpense}
 
-Total Expenses:
-₹${totalExpense}
-
-Expenses Data:
+Expenses:
 ${JSON.stringify(expenses)}
 
-Provide:
+Give:
+1. Financial score /100
+2. Spending summary
+3. Overspending areas
+4. Savings advice
+5. 50-30-20 plan
+6. 3 improvement tips
 
-1. Financial Health Score /100
-
-2. Spending Summary
-
-3. Category-wise analysis
-
-4. Detect overspending
-
-5. Suggest realistic monthly savings
-
-6. Suggest 50-30-20 budgeting plan
-
-7. Give 3 personalized improvement tips
-
-Rules:
-- Assume income is monthly
-- Keep advice practical for Indian users
-- Do not provide risky investment recommendations
-- Keep response beginner friendly
+Indian user.
+Simple language.
 
 `;
 
+const result =
+await ai.models.generateContent({
+
+model:"gemini-2.5-flash",
+
+contents:prompt
+
+});
 
 
-        const result =
-            await openai.chat.completions.create({
+res.json({
 
-                model: "gpt-4.1-mini",
+analysis: result.text
 
-                messages: [
-
-                    {
-                        role: "system",
-                        content:
-                            "You are FinSight AI, an AI powered personal finance advisor."
-                    },
-
-                    {
-                        role: "user",
-                        content: prompt
-                    }
-
-                ]
-
-            });
+});
 
 
 
-        const response =
-            result.choices[0].message.content;
+}
+
+catch(error){
+
+console.log("AI ERROR:", error);
+
+res.status(500).json({
+
+message:"AI failed",
+error:error.message
+
+});
+
+}
+
+}
 
 
-
-        res.json({
-
-            analysis: response
-
-        });
-
-
-    }
-
-    catch (error) {
-
-
-        console.log(
-            "AI ERROR FULL:",
-            error
-        );
-
-
-        res.status(500).json({
-
-            message: "AI failed",
-
-            error: error.message
-
-        });
-
-
-    }
-
-
-};
-
-
-
-module.exports = {
-
-    analyzeFinance
-
+module.exports={
+analyzeFinance
 };
