@@ -17,9 +17,11 @@ import API from "../api/axios";
 function Dashboard(){
 
 const navigate = useNavigate();
-const [data,setData]=useState(null);
-const [ai,setAi]=useState("");
-const [expenses,setExpenses]=useState([]);
+
+const [data,setData] = useState(null);
+const [ai,setAi] = useState("");
+const [expenses,setExpenses] = useState([]);
+const [loading,setLoading] = useState(true);
 
 
 const COLORS = [
@@ -32,28 +34,36 @@ const COLORS = [
 
 
 // Dashboard data
-const getDashboard=async()=>{
+const getDashboard = async () => {
 
-try{
+  try {
 
-const res=await API.get(
-"/dashboard"
-);
+    console.log("Dashboard API calling...");
 
-setData(res.data);
+    const res = await API.get("/dashboard");
 
-}
+    console.log("Dashboard Data:", res.data);
 
-catch(error){
+    setData(res.data);
 
-console.log(error);
+  } 
+  catch (error) {
 
-}
-finally{
+    console.log("Dashboard Error:", error);
 
-setLoading(false);
+    setData({
+      totalIncome: 0,
+      totalExpense: 0,
+      savings: 0,
+      categoryData: []
+    });
 
-}
+  } 
+  finally {
+
+    setLoading(false);
+
+  }
 
 };
 
@@ -164,7 +174,7 @@ useEffect(() => {
 
 
 
-if(!data){
+if(loading){
 
 return(
 
