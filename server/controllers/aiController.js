@@ -91,19 +91,17 @@ Rules:
 
 const result =
 await ai.models.generateContent({
-model:"gemini-2.5-flash",
-contents:prompt
+    model:"gemini-2.5-flash",
+    contents:prompt
 });
 
 
-const response = result.text;
-
+const response =
+result.text || result.candidates?.[0]?.content?.parts?.[0]?.text;
 
 
 res.json({
-
-analysis:response
-
+    analysis: response
 });
 
 
