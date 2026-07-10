@@ -12,7 +12,7 @@ The platform provides smart recommendations to improve savings, detect overspend
 
 ## Frontend
 
-https://finsight-ai-68m.onrender.com
+https://finsight-ai-68rn.onrender.com
 
 
 ## 🔗 Backend API
